@@ -90,14 +90,13 @@ async function verifyEmail(code, proxy) {
 }
 
 // Check for new emails 
-async function checkForNewEmails(proxy) {
+async function checkForNewEmails(proxy, maxRetries = 3) {
+    let retryCount = 0;
     try {
         const emailData = await mailjs.getMessages();
-        // Get all recent emails
         const emails = emailData.data;
 
         for (const email of emails) {
-            // Skip non-verification emails
             if (!email.subject.toLowerCase().includes('verification')) {
                 continue;
             }
@@ -119,7 +118,18 @@ async function checkForNewEmails(proxy) {
                         await mailjs.deleteMessage(msgId);
                         return true;
                     }
-                    console.log('Full verification response:', verifyResult);
+
+                    // Handle verification failure
+                    retryCount++;
+                    if (retryCount >= maxRetries) {
+                        logger(`Verification failed after ${maxRetries} attempts`, '', 'error');
+                        await mailjs.deleteMessage(msgId);
+                        return false;
+                    }
+                    
+                    logger(`Verification attempt ${retryCount}/${maxRetries} failed, retrying...`, '', 'warn');
+                    await delay(5000); // Wait before retry
+                    continue;
                 }
             }
 
@@ -267,10 +277,18 @@ async function main() {
                 }
 
                 let isEmailVerified = false;
-                while (!isEmailVerified) {
+                let verificationAttempts = 0;
+                const maxVerificationAttempts = 5; // Maximum number of verification attempts
+
+                while (!isEmailVerified && verificationAttempts < maxVerificationAttempts) {
                     isEmailVerified = await checkForNewEmails(proxy);
                     if (!isEmailVerified) {
-                        await delay(5000); 
+                        verificationAttempts++;
+                        if (verificationAttempts >= maxVerificationAttempts) {
+                            logger(`Failed to verify email after ${maxVerificationAttempts} attempts, skipping account`, '', 'error');
+                            break;
+                        }
+                        await delay(5000);
                     }
                 }
 
