@@ -6,10 +6,10 @@ export function logger(message, value = '', level = 'info') {
         info: chalk.greenBright,
         warn: chalk.yellowBright,
         error: chalk.redBright,
-        success: chalk.blueBright,
+        success: chalk.cyanBright,
         debug: chalk.magentaBright,
     };
-    
+
     const log = levels[level] || chalk.whiteBright;
-    console.log(log(`[${now}] [${level.toUpperCase()}]: ${message}`, chalk.yellowBright(value)));
+    console.log(log(`[${now}] [${level.toUpperCase()}]: ${message}`, value));
 }

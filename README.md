@@ -23,9 +23,8 @@ AI inference powered by distributed compute
 
 - **NPM**: Ensure you have npm installed.
 
-put your proxy in file `proxy.txt` format `http://username:pass@ip:port` 1 proxy for 1 provider
-
-so if you want create multiple providers you need to put multiple proxy there.
+put your proxy in file `proxy.txt` format `http://username:pass@ip:port` 
+recommended use static proxy...
 
 ## Setup
 
@@ -64,11 +63,6 @@ so if you want create multiple providers you need to put multiple proxy there.
 
    ```bash
    npm run start
-   ```
-
-7. Additional feature auto refferal
-   ```bash
-   npm run autoreff
    ```
 
 ## ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)

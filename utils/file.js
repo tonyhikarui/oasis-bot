@@ -7,12 +7,7 @@ export function readToken(filePath) {
             if (err) return reject(err);
 
             const tokens = data.split('\n').map(token => token.trim()).filter(token => token);
-            
-            if (tokens.length > 0) {
-                resolve(tokens);  
-            } else {
-                reject('No tokens found');
-            }
+            resolve(tokens);
         });
     });
 }
@@ -36,8 +31,8 @@ export function readAccounts(filePath) {
 
                     return { email, password };
                 })
-                .filter(account => account !== null); 
-            
+                .filter(account => account !== null);
+
             if (accounts.length === 0) {
                 console.warn("No valid accounts found in the file.");
             }
@@ -56,5 +51,5 @@ export function saveToken(filePath, token) {
     });
 }
 export function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve => setTimeout(resolve, ms));
 }

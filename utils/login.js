@@ -56,6 +56,7 @@ export async function loginFromFile(filePath) {
         const accounts = await readAccounts(filePath);
         let successCount = 0;
 
+        logger(`Trying to login and get token to all accounts...`)
         for (const account of accounts) {
             logger(`Attempting login for ${account.email}`);
             const token = await loginUser(account.email, account.password);

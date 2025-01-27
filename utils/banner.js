@@ -1,27 +1,20 @@
-import chalk from 'chalk';
+const banner = `
+███████╗██╗     ██╗  ██╗ ██████╗██╗   ██╗██████╗ ███████╗██████╗
+╚══███╔╝██║     ██║ ██╔╝██╔════╝╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗
+  ███╔╝ ██║     █████╔╝ ██║      ╚████╔╝ ██████╔╝█████╗  ██████╔╝
+ ███╔╝  ██║     ██╔═██╗ ██║       ╚██╔╝  ██╔══██╗██╔══╝  ██╔══██╗
+███████╗███████╗██║  ██╗╚██████╗   ██║   ██████╔╝███████╗██║  ██║
+╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝  ╚═╝
 
-const art = `
-   ███████╗██╗     ██╗  ██╗     ██████╗██╗   ██╗██████╗ ███████╗██████╗ 
-   ╚══███╔╝██║     ██║ ██╔╝    ██╔════╝╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗
-     ███╔╝ ██║     █████╔╝     ██║      ╚████╔╝ ██████╔╝█████╗  ██████╔╝
-    ███╔╝  ██║     ██╔═██╗     ██║       ╚██╔╝  ██╔══██╗██╔══╝  ██╔══██╗
-   ███████╗███████╗██║  ██╗    ╚██████╗   ██║   ██████╔╝███████╗██║  ██║
-   ╚══════╝╚══════╝╚═╝  ╚═╝     ╚═════╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝  ╚═╝
-                    Running Oasis Ai BETA CLI Version                
-                t.me/zlkcybergroup *** github.com/zlkcyber                   
-`;
+      === Running Oasis CLI Version ===
+** ====================================== **
+*    This script is created for free use   *
+*  Do not sell or distribute it for profit *
+** ====================================== **
 
-export function centerText(text) {
-    const lines = text.split('\n');
-    const terminalWidth = process.stdout.columns || 80; 
-    return lines
-        .map(line => {
-            const padding = Math.max((terminalWidth - line.length) / 2, 0);
-            return ' '.repeat(padding) + line;
-        })
-        .join('\n');
-}
 
-export function showBanner() {
-    console.log(chalk.green(centerText(art)));
-}
+* Author: @zlkcyber                        
+* Group: t.me/zlkcybergroup                
+* Github Link: github.com/zlkcyber         
+                 `
+export default banner;
